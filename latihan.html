@@ -1,10 +1,21 @@
-<html>
-    <head>
-        <title>Learn Github</title>
-    </head>
+name: Cek Kode HTML (Windows)
 
-    <body>
-        <h1>Git Tutorial</h1>
-        <h3>Git Commands</h3>
-    </body>
-</html>
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install HTMLHint
+        run: npm install -g htmlhint
+
+      - name: Periksa HTML
+        run: htmlhint "*/.html"
